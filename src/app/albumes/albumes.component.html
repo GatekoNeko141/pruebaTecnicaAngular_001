@@ -1,0 +1,50 @@
+<div class="container pt-2">
+  <a [routerLink]="['/']">Volver</a>
+  <h3>Álbumes</h3>
+
+  <div class="row">
+
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 pb-3" *ngFor="let item of listPhotos">
+      <div class="card h-100">
+        <div class="row g-0">
+          <div class="col-md-4 t-center">
+            <img [src]="item.thumbnailUrl" class="img-fluid rounded-start" [alt]="item.thumbnailUrl">
+            <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#modalAlbum" (click)="cargarInfoAlbum(item.albumId)">Ver</button>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.title }}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="modal fade" id="modalAlbum" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Información del Álbum</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <tbody>
+              <tr>
+                <th scope="row">Nombre</th>
+                <td>{{ title }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <img [src]="image" class="img-fluid rounded-start" [alt]="image">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>

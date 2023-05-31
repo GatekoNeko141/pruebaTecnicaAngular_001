@@ -1,0 +1,86 @@
+<div class="container pt-2">
+  <a [routerLink]="['/']">Volver</a>
+  <h3>Detalle de Usuario</h3>
+  
+  <table class="table">
+    <tbody>
+      <tr>
+        <th scope="row">Nombre</th>
+        <td>{{ nombre }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Usuario</th>
+        <td>{{ username }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Correo</th>
+        <td>{{ email }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Teléfono</th>
+        <td>{{ phone }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Sitio Web</th>
+        <td>{{ website }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Direccion</th>
+        <td>{{ address }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Codigo ZIP</th>
+        <td>{{ zipcode }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Trabajo</th>
+        <td>{{ company }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="row">
+    <div class="col-12 col-sm-6 col-lg-4 pb-3" *ngFor="let item of resultFiltered">
+      <div class="card text-center h-100">
+        <div class="card-header">
+          Post #{{ item.id }}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ item.title }}</h5>
+          <p class="card-text">{{ item.body }}</p>
+        </div>
+        <div class="card-footer text-muted">
+          <button class="btn btn-primary" data-bs-toggle="modal" [attr.data-bs-target]="'#modalComments_'+item.id" (click)="cargarComentarios(item.id)">Ver comentarios</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="modal fade modal-lg" *ngFor="let item of resultFiltered" [id]="'modalComments_'+item.id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Post #{{ item.id }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <figure *ngFor="let comentario of comentarios" class="border rounded py-2 px-3">
+            <blockquote class="blockquote">
+              <p>{{ comentario.body }}</p>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+              {{ comentario.email }}, <cite title="Source Title">{{ comentario.name }}</cite>
+            </figcaption>
+          </figure>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
